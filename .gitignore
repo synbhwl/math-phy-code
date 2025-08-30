@@ -1,3 +1,4 @@
 *.exe
-points.txt
-eqn.txt
+linear-regression/points.txt
+linear-regression/eqn.txt
+todo.txt

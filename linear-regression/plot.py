@@ -4,7 +4,7 @@ import numpy as np
 x = []
 y = []
 
-with open('points.txt', 'r') as f:
+with open('linear-regression/points.txt', 'r') as f:
     page = f.read()
     lines = page.split('\n')
 
@@ -13,7 +13,7 @@ with open('points.txt', 'r') as f:
             x.append(float(line.split(' ')[0]))
             y.append(float(line.split(' ')[1]))
 
-with open('eqn.txt', 'r') as eqnfile:
+with open('linear-regression/eqn.txt', 'r') as eqnfile:
     line = eqnfile.read()
     m = float(line.strip().split(' ')[0])
     b = float(line.strip().split(' ')[1])
