@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -44,22 +45,46 @@ double find_slope(vector<double> x_dev, vector<double> y_dev){
     return numerator/denominator;
 }
 
+void write_points(vector<double> x, vector<double> y, double m, double b){
+    fstream pointfile("points.txt", ios::out);
+
+    if(pointfile.is_open()){
+        for(int i = 0; i < x.size(); i++){
+            pointfile << x[i] << " " << y[i] << endl;
+        }
+    } else{
+        cerr << "points file not opened" << endl;
+    }
+
+    pointfile.close();
+
+    fstream eqnfile("eqn.txt", ios::out);
+    
+    if(eqnfile.is_open()){
+        eqnfile << m << " " << b << endl;
+    }else{
+        cerr << "eqn file not opened" << endl;
+    }
+
+    eqnfile.close();
+}
+
 int main(){
     // i am using this as my first dataset just to get this working
     vector<double> x = {
-        1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0,
-        11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0,
-        21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0,
-        31.0, 32.0, 33.0, 34.0, 35.0, 36.0, 37.0, 38.0, 39.0, 40.0,
-        41.0, 42.0, 43.0, 44.0, 45.0, 46.0, 47.0, 48.0, 49.0, 50.0
+    1.2,  3.5,  2.1,  7.8,  5.3,  9.4,  4.0,  11.2, 8.7,  13.5,
+    6.0,  15.1, 10.3, 18.2, 12.4, 20.0, 14.6, 22.3, 16.7, 25.1,
+    19.0, 27.4, 21.5, 29.6, 23.8, 31.0, 26.2, 33.4, 28.5, 35.6,
+    30.7, 38.0, 32.9, 40.2, 34.5, 42.1, 36.8, 44.3, 39.0, 46.5,
+    41.2, 48.0, 43.4, 50.1, 45.6, 52.3, 47.8, 54.0, 50.2, 55.0
     };
 
     vector<double> y = {
-        2.2, 3.8, 6.1, 7.7, 9.9, 11.8, 14.3, 15.8, 17.6, 20.1,
-        22.2, 23.9, 26.0, 28.1, 29.8, 32.2, 33.7, 35.9, 38.2, 39.7,
-        41.9, 43.6, 46.1, 48.2, 49.9, 52.1, 53.6, 56.1, 58.2, 60.0,
-        61.7, 63.8, 66.2, 68.3, 70.1, 72.0, 74.2, 76.0, 78.1, 80.0,
-        81.9, 83.7, 86.2, 88.0, 90.0, 92.2, 94.0, 96.1, 98.2, 99.9
+    18.3, 12.1, 25.4, 30.2, 19.8, 42.6, 15.3, 48.9, 38.7, 55.1,
+    32.0, 60.2, 45.6, 65.3, 49.8, 70.1, 52.4, 75.6, 58.9, 80.3,
+    62.1, 85.0, 68.7, 90.2, 72.4, 95.1, 80.3, 98.6, 85.2, 105.4,
+    92.1, 110.0, 95.3, 115.2, 100.1, 118.3, 105.6, 122.4, 110.2, 125.7,
+    115.3, 130.0, 120.1, 135.2, 128.4, 139.6, 132.8, 142.0, 145.3, 148.7
     };
 
     // finding mean of both
@@ -76,6 +101,7 @@ int main(){
     // now the intercept b
     double b = avg_y - (m * avg_x);
 
-    cout << "the equation is therefore ig: y = " << m << "x + " << b;
+    write_points(x, y, m, b);
+    cout << "the equation is therefore ig: y = " << m << "x + " << b << endl;
     return 0;
 }
