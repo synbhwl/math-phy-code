@@ -46,7 +46,7 @@ double find_slope(vector<double> x_dev, vector<double> y_dev){
 }
 
 void write_points(vector<double> x, vector<double> y, double m, double b){
-    fstream pointfile("linear-regression/points.txt", ios::out);
+    fstream pointfile("points.txt", ios::out);
 
     if(pointfile.is_open()){
         for(int i = 0; i < x.size(); i++){
@@ -58,7 +58,7 @@ void write_points(vector<double> x, vector<double> y, double m, double b){
 
     pointfile.close();
 
-    fstream eqnfile("linear-regression/eqn.txt", ios::out);
+    fstream eqnfile("eqn.txt", ios::out);
     
     if(eqnfile.is_open()){
         eqnfile << m << " " << b << endl;
